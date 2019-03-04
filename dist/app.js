@@ -58,7 +58,7 @@ render(app, {
 });
 var env = process.env.NODE_ENV || 'development'; // Current mode
 
-var publicKey = _fs2.default.readFileSync(_path2.default.join(__dirname, '../publicKey.pub'));
+// const publicKey = fs.readFileSync(path.join(__dirname, '../publicKey.pub'))
 
 app.use(function (ctx, next) {
   if (ctx.request.header.host.split(':')[0] === 'localhost' || ctx.request.header.host.split(':')[0] === '127.0.0.1') {

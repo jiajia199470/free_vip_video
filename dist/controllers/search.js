@@ -21,23 +21,25 @@ var videoSearch = function () {
         switch (_context.prev = _context.next) {
           case 0:
             searchValue = ctx.query.value;
-            _context.next = 3;
+
+            console.log(searchValue);
+            _context.next = 4;
             return Movie.findOne({
               where: {
                 name: searchValue
               }
             });
 
-          case 3:
+          case 4:
             movieSearchResult = _context.sent;
-            _context.next = 6;
+            _context.next = 7;
             return TvList.findOne({
               where: {
                 name: searchValue
               }
             });
 
-          case 6:
+          case 7:
             tvSearchResult = _context.sent;
 
             ctx.body = {
@@ -49,7 +51,7 @@ var videoSearch = function () {
               }
             };
 
-          case 8:
+          case 9:
           case 'end':
             return _context.stop();
         }

@@ -12,7 +12,7 @@ module.exports = {
   },
   tengxun: {
     domain: 'http://v.qq.com',
-    movie: 'http://v.qq.com/x/list/movie?cate=10001',
+    movie: 'http://v.qq.com/x/list/movie?itype=-1',
     tv: 'http://v.qq.com/x/list/tv?iyear=1&sort=18',
     tvDetail: 'https://v.qq.com'
   },
