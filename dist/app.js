@@ -16,7 +16,7 @@ var _koaStatic = require('koa-static2');
 
 var _koaStatic2 = _interopRequireDefault(_koaStatic);
 
-var _config = require('./config');
+var _config2 = require('./config');
 
 var _path = require('path');
 
@@ -64,7 +64,7 @@ app.use(function (ctx, next) {
   if (ctx.request.header.host.split(':')[0] === 'localhost' || ctx.request.header.host.split(':')[0] === '127.0.0.1') {
     ctx.set('Access-Control-Allow-Origin', '*');
   } else {
-    ctx.set('Access-Control-Allow-Origin', _config.System.HTTP_server_host);
+    ctx.set('Access-Control-Allow-Origin', _config2.System.HTTP_server_host);
   }
   ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
@@ -97,8 +97,9 @@ if (env === 'development') {
   });
 }
 
-app.listen(_config.System.API_server_port);
+app.listen(_config.System.API_server_port, _config.System.API_server_host);
+
+console.log('server is:' + _config.System.API_server_host + ":" + _config.System.API_server_port);
 
 console.log('Now start API server on port ' + _config.System.API_server_port + '...');
-
 exports.default = app;
