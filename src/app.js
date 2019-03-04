@@ -67,9 +67,13 @@ if (env === 'development') { // logger
   })
 }
 
-app.listen(_config.System.API_server_port,_config.System.API_server_host);
 
-console.log('server is:'+_config.System.API_server_host+":"+_config.System.API_server_port);
+app.listen(SystemConfig.API_server_port);
 
-console.log('Now start API server on port ' + _config.System.API_server_port + '...');
+app.listen(SystemConfig.API_server_port,SystemConfig.API_server_host);
+
+console.log('server is:'+SystemConfig.API_server_host+":"+SystemConfig.API_server_port);
+
+console.log('Now start API server on port ' + SystemConfig.API_server_port + '...')
+
 export default app
