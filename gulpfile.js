@@ -159,7 +159,6 @@ var md5HtmlStream = function(isBuild) {
 
     // 生成css替换函数
     var replaceCssFunc = replaceFunc(function(src) {
-
       return src.trim()
         // 替换路径
         // .replace(/[\\\/]src[\\\/]less[\\\/]/, isBuild ? '//yun.duiba.com.cn/maila/h5/' : '//yun.dui88.com/maila/h5/')
