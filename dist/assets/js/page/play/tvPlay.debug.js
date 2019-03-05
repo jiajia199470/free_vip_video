@@ -16,7 +16,7 @@
   }return r;
 })()({ 1: [function (require, module, exports) {
     (function (window, $) {
-      var baseUrl = 'http://000o.cc/jx/ty.php?url=';
+      var baseUrl = 'https://www.myxin.top/jx/api/?url=';
       var videoUrl = $('#vplay').attr('data-src');
       var playUrl = '';
       var $vplay = $('#vplay');
