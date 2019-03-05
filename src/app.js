@@ -10,9 +10,10 @@ import ErrorRoutesCatch from './middleware/ErrorRoutesCatch'
 import ErrorRoutes from './routes/error-routes'
 import jwt from 'koa-jwt'
 import fs from 'fs'
-var movie = require('./crawl/movie/tengxun.js')
+// var movie = require('./crawl/movie/tengxun.js')
+// movie.getMovie();
 var less = require('less')
-require('./services/tengxun/schedule.js')
+require('./services/tengxun/schedule.js');//爬虫 定时任务
 const render = require('koa-art-template')
 
 const app = new Koa2()

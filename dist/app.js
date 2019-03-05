@@ -44,9 +44,10 @@ var _fs2 = _interopRequireDefault(_fs);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var movie = require('./crawl/movie/tengxun.js');
+// var movie = require('./crawl/movie/tengxun.js')
+// movie.getMovie();
 var less = require('less');
-require('./services/tengxun/schedule.js');
+require('./services/tengxun/schedule.js'); //爬虫 定时任务
 var render = require('koa-art-template');
 
 var app = new _koa2.default();

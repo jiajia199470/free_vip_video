@@ -14,11 +14,9 @@ if (env === 'production') {
 } else {
     dbConfig = {
         host: '127.0.0.1', // 服务器地址
-        username: 'quanying', // 数据库用户名
-        password: '123456', // 数据库密码
         port: 3306, // 数据库端口号
-        // username: 'root', // 数据库用户名 bendi
-        // password: '12345Zxj', // 数据库密码 bendi
+        username: 'root', // 数据库用户名 bendi
+        password: '12345Zxj', // 数据库密码 bendi
         database: 'quanying', // 数据库名称
         prefix: 'api_' // 默认"api_"
     };

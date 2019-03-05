@@ -36,7 +36,7 @@ const getTvList = function() {
       Tvlist.createTv({
         url: $item.find('.figure').attr('href'),
         name: $item.find('.figure').find('img').eq(0).attr('alt'),
-        imgUrl: $item.find('.figure').find('img').eq(0).attr('src'),
+        imgUrl: $item.find('.figure').find('img').eq(0).attr('r-lazyload'),
         nums:$item.find('.figure_info').text(),
         score:$item.find('.score_l').text() + $item.find('.score_s').text(),
         desc: $item.find('.figure_info').text(),
