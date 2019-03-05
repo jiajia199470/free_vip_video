@@ -1,5 +1,7 @@
 'use strict';
 
+var _config = require('../config');
+
 module.exports = {
   headers: {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
@@ -16,6 +18,6 @@ module.exports = {
     tv: 'http://v.qq.com/x/list/tv?iyear=1&sort=18',
     tvDetail: 'https://v.qq.com'
   },
-  domain: 'http://127.0.0.1',
-  port: 18080
+  domain: _config.System.API_server_type + _config.System.API_server_host,
+  port: _config.System.API_server_port
 };

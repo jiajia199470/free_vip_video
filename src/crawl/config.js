@@ -1,3 +1,6 @@
+import {
+    System as SystemConfig
+} from '../config';
 module.exports = {
   headers: {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
@@ -14,6 +17,6 @@ module.exports = {
     tv: 'http://v.qq.com/x/list/tv?iyear=1&sort=18',
     tvDetail: 'https://v.qq.com'
   },
-  domain: 'http://127.0.0.1',
-  port: 18080
+  domain: SystemConfig.API_server_type+SystemConfig.API_server_host,
+  port: SystemConfig.API_server_port
 }
