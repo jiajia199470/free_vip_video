@@ -17,9 +17,9 @@ var movieRule = new schedule.RecurrenceRule();
 
 movieRule.dayOfWeek = [0, new schedule.Range(1, 6)];
 //
-// movieRule.hour = 15;
-//
-// movieRule.minute = 35;
+movieRule.hour = 15;
+
+movieRule.minute = 35;
 
 // 一个星期中的某些天的某个时刻执行:周一到周日的15点执行
 var TvListRule = new schedule.RecurrenceRule();
