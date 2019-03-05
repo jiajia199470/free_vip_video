@@ -97,8 +97,6 @@ if (env === 'development') {
   });
 }
 
-app.listen(_config.System.API_server_port);
-
 app.listen(_config.System.API_server_port, _config.System.API_server_host);
 
 console.log('server is:' + _config.System.API_server_host + ":" + _config.System.API_server_port);

@@ -67,9 +67,6 @@ if (env === 'development') { // logger
   })
 }
 
-
-app.listen(SystemConfig.API_server_port);
-
 app.listen(SystemConfig.API_server_port,SystemConfig.API_server_host);
 
 console.log('server is:'+SystemConfig.API_server_host+":"+SystemConfig.API_server_port);
