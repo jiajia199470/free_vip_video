@@ -21,8 +21,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     }return o;
   }return r;
 })()({ 1: [function (require, module, exports) {
-    require('../utils/lib-pagination/pagination.js');
-  }, { "../utils/lib-pagination/pagination.js": 2 }], 2: [function (require, module, exports) {
     /*! jqPaginator-1.2.0 
      * http://jqPaginator.keenwon.com
      */

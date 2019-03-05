@@ -2,7 +2,7 @@
   <div class="mod_title">
     <h2 class="title"><a href="javascript"><span class="text_medium">热门电视剧</span></a></h2>
     <div class="title_sub">
-      <a href="">更多</a>
+      <a href="/page/list/2?page=0&pagesize=20">更多</a>
     </div>
   </div>
   <div class="mod_bd">
@@ -10,7 +10,7 @@
       <ul class="figures_list">
         {{each tv item i}}
         <li class="list_item">
-          <a href="/page/play/tv?url={{item.url}}&title={{item.name}}" target="_blank" class="figure"  title="{{item.name}}" >
+          <a href="/page/play/tv?url={{item.url}}&title={{item.name}}&id={{item.id}}" target="_blank" class="figure"  title="{{item.name}}" >
             <img alt="{{item.name}}" src="{{item.imgUrl}}">
             <div class="figure_caption figure_caption_info">
               <div class="figure_info">
