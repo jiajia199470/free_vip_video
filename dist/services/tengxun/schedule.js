@@ -33,7 +33,7 @@ TvListRule.minute = 30;
 var TvRule = new schedule.RecurrenceRule();
 
 TvRule.dayOfWeek = [0, new schedule.Range(1, 6)];
-
+//
 TvRule.hour = 15;
 
 TvRule.minute = 30;

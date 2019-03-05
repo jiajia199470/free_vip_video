@@ -15,11 +15,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var cheerio = require('cheerio');
 var rp = require('request-promise');
 var offset = 0;
+var charge = 1; //腾讯会员包月vip
 var allPage = 30;
 var isEnd = false;
 var getMovie = function getMovie() {
   var options = {
-    uri: _config2.default.tengxun.movie + '&offset=' + offset,
+    uri: _config2.default.tengxun.movie + '&offset=' + offset + '&charge=' + charge,
     headers: _config2.default.headers,
     transform: function transform(body) {
       return cheerio.load(body);

@@ -8,6 +8,7 @@ var cheerio = require('cheerio')
 var rp = require('request-promise')
 var offset = 0
 var allPage = 30;
+var charge = 1;//腾讯会员包月vip
 var lists = []
 var isEnd = false
 const getTvList = function() {

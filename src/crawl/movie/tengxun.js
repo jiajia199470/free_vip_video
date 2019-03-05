@@ -3,12 +3,13 @@ import {sleep} from '../utils/tool.js'
 import Movie from '../../services/tengxun/movie'
 var cheerio = require('cheerio')
 var rp = require('request-promise')
-var offset = 0
+var offset = 0;
+var charge = 1;//腾讯会员包月vip
 var allPage = 30;
 var isEnd = false
 const getMovie = function() {
   var options = {
-    uri: config.tengxun.movie + '&offset=' + offset,
+    uri: config.tengxun.movie + '&offset=' + offset+'&charge='+charge,
     headers: config.headers,
     transform: function (body) {
       return cheerio.load(body)
