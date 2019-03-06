@@ -5,18 +5,21 @@
   <%- include('../../components/layout/header.html') %>
   <title>观影网</title>
   <link rel="dns-prefetch" href="//yun.duiba.com.cn">
-  <link rel="stylesheet" href="/assets/css/page/home/index_201903051739.css" media="all" />
+  <link rel="stylesheet" href="/assets/css/components/common/footer_201903061759.css" media="all" />
+  <link rel="stylesheet" href="/assets/css/page/home/index_201903061759.css" media="all" />
 </head>
 
 <body>
+<%- include('./homeTitle.html') %>
   <section class="w-main">
-    <%- include('./homeTitle.html') %>
-    <%- include('./netLink.html') %>
-    <%- include('./tv.html') %>
-    <%- include('./movie.html') %>
-
+   <!--<div class="container">-->
+     <!--<%- include('./netLink.html') %>-->
+     <%- include('./tv.html') %>
+     <%- include('./movie.html') %>
+   <!--</div>-->
   </section>
   <div class="mailaReplaceHere"></div>
-  <script type="text/javascript" src="/assets/js/page/home/index_201903051739.js"></script>
+  <%- include('../../components/layout/footer.html') %>
+  <script type="text/javascript" src="/assets/js/page/home/index_201903061759.js"></script>
 </body>
 </html>

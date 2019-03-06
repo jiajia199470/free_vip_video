@@ -42,7 +42,7 @@ const getTvList = function() {
         score:$item.find('.score_l').text() + $item.find('.score_s').text(),
         desc: $item.find('.figure_info').text(),
         roles: roles.join(',')
-      })
+      }).catch(() => { })
     })
     offset = offset + 30;
     sleep(1000)
@@ -52,33 +52,35 @@ const getTvList = function() {
     console.log(e)
   })
 }
-const getTvDetail = function(item, callback) {
-  var options = {
-    uri: item.url,
-    headers: config.headers,
-    transform: function (body) {
-      return cheerio.load(body)
+
+// https://v.qq.com/detail/b/brq7blajvjhrcit.html 从详情页获取全部视频 \/([\w]+)\.html 匹配/brq7blajvjhrcit.html
+const getTvDetail = function (item, callback) {
+    var options = {
+        uri: config.tengxun.tvDetail+item.url.match(/\/([\w]+)\.html/)[0],
+        headers: config.headers,
+        transform: function (body) {
+            return cheerio.load(body)
+        }
     }
-  }
-  rp(options).then(function ($) {
-    var $scroll_wrap = $('.scroll_wrap')
-    const title = $('.player_title').find('a').text()
-    var list = $scroll_wrap.find('.mod_episode').find('.item')
-    list.each(function() {
-      let $item = $(this)
-      var roles = []
-      Tvlist.createTvDetail({
-        tvListId: +item.id,
-        title: title,
-        url: config.tengxun.domain + $item.find('a').attr('href'),
-        content: $item.find('a').text().trim(),
-      })
+    rp(options).then(function ($) {
+        var $scroll_wrap = $('._playsrc_series')
+        const title = $('.video_title_cn').find('a').text()
+        var list = $scroll_wrap.find('.mod_episode').find('.item')
+        list.each(function() {
+            let $item = $(this)
+            var roles = []
+            Tvlist.createTvDetail({
+                tvListId: +item.id,
+                title: title,
+                url: $item.find('a').attr('href'),
+                content: $item.find('a span').text().trim(),
+            }).catch(() => { })
+        })
+        callback(null, 'successful')
+        return null;
+    }).catch(function (e) {
+        console.log(e)
     })
-    callback(null, 'successful')
-    return null;
-  }).catch(function (e) {
-    console.log(e)
-  })
 }
 const getTV = async function(data) {
   var page = data && data.page || 0;
@@ -88,6 +90,17 @@ const getTV = async function(data) {
     limit: pagesize
   })
   var searchResult = JSON.parse(JSON.stringify(tvLists))
+
+   /*
+   //更新特定一部电视剧的全集
+   var tvLists = await  models.TvList.findOne({
+        where: {
+            id: 4
+        }
+    });
+    var searchResult =[];
+    searchResult.push(tvLists.dataValues);*/
+
   if(searchResult.length) {
     // 使用async控制异步抓取   
     // mapLimit(arr, limit, iterator, [callback])

@@ -68,7 +68,7 @@ var getTvList = function getTvList() {
         score: $item.find('.score_l').text() + $item.find('.score_s').text(),
         desc: $item.find('.figure_info').text(),
         roles: roles.join(',')
-      });
+      }).catch(function () {});
     });
     offset = offset + 30;
     (0, _tool.sleep)(1000);
@@ -78,17 +78,19 @@ var getTvList = function getTvList() {
     console.log(e);
   });
 };
+
+// https://v.qq.com/detail/b/brq7blajvjhrcit.html 从详情页获取全部视频 \/([\w]+)\.html 匹配/brq7blajvjhrcit.html
 var getTvDetail = function getTvDetail(item, callback) {
   var options = {
-    uri: item.url,
+    uri: _config2.default.tengxun.tvDetail + item.url.match(/\/([\w]+)\.html/)[0],
     headers: _config2.default.headers,
     transform: function transform(body) {
       return cheerio.load(body);
     }
   };
   rp(options).then(function ($) {
-    var $scroll_wrap = $('.scroll_wrap');
-    var title = $('.player_title').find('a').text();
+    var $scroll_wrap = $('._playsrc_series');
+    var title = $('.video_title_cn').find('a').text();
     var list = $scroll_wrap.find('.mod_episode').find('.item');
     list.each(function () {
       var $item = $(this);
@@ -96,9 +98,9 @@ var getTvDetail = function getTvDetail(item, callback) {
       _tvlist2.default.createTvDetail({
         tvListId: +item.id,
         title: title,
-        url: _config2.default.tengxun.domain + $item.find('a').attr('href'),
-        content: $item.find('a').text().trim()
-      });
+        url: $item.find('a').attr('href'),
+        content: $item.find('a span').text().trim()
+      }).catch(function () {});
     });
     callback(null, 'successful');
     return null;
@@ -124,6 +126,16 @@ var getTV = function () {
           case 4:
             tvLists = _context.sent;
             searchResult = JSON.parse((0, _stringify2.default)(tvLists));
+
+            /*
+            //更新特定一部电视剧的全集
+            var tvLists = await  models.TvList.findOne({
+                 where: {
+                     id: 4
+                 }
+             });
+             var searchResult =[];
+             searchResult.push(tvLists.dataValues);*/
 
             if (!searchResult.length) {
               _context.next = 11;

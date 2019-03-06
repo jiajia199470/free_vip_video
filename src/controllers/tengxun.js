@@ -1,6 +1,9 @@
 const TvList = require('../models').TvList
 const Tv = require('../models').Tv
 const Movie = require('../models').Movie
+
+const {getTotalPageNum} = require('../crawl/utils/tool')
+
 export let getMovieList = async function(data) {
   var page = data && data.page || 0;
   var pagesize = data && data.pagesize || 20;
@@ -36,10 +39,19 @@ export let createTv = async function (data) {
 export let getTvList = async function(data) {
   const page = data && data.page || 0;
   const page_size =  data && +data.pagesize || 20;
-  var tvLists = await TvList.findAll({
+  var tvLists = await TvList.findAndCountAll({
     offset: page * page_size,
     limit: page_size
-  })
+  }).then((res)=>{
+      let result = {};
+      var pager = {};
+      result.list = res.rows;
+      pager.pageCount = Math.floor(getTotalPageNum(res.count,page_size));// 总页数
+      pager.countindex = page+1;// 当前页
+      pager.pageSize = page_size;// 页数
+      result.pager = pager;
+      return result;
+  });
   return JSON.parse(JSON.stringify(tvLists))
 }
 export let getTvDetail = async function(data) {

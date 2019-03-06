@@ -30,7 +30,6 @@ TvRule.hour = 15;
 TvRule.minute = 30;
 
 var l = schedule.scheduleJob(TvRule, function () {
-
     tvTencentCrawl.getTV();
 });
 

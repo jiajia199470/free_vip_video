@@ -15,7 +15,7 @@ module.exports = {
     domain: 'http://v.qq.com',
     movie: 'http://v.qq.com/x/list/movie?itype=-1',
     tv: 'http://v.qq.com/x/list/tv?iyear=1&sort=18',
-    tvDetail: 'https://v.qq.com'
+    tvDetail: 'https://v.qq.com/detail/b',//例如花不弃详情页：https://v.qq.com/detail/b/brq7blajvjhrcit.html
   },
   domain: SystemConfig.API_server_type+SystemConfig.API_server_host,
   port: SystemConfig.API_server_port

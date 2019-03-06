@@ -1,5 +1,6 @@
 .g-list{
-  margin-top: 30px;
+  //margin-top: 30px;
+  padding-top: 5pc;
   .mod_title{
     padding: 5px 0;
     .title{
@@ -53,8 +54,8 @@
     }
     .figures_list{
       position: relative;
-      white-space: nowrap;
-      overflow: hidden;
+      //white-space: nowrap;
+      //overflow: hidden;
     }
     .figure {
       display: block;
@@ -89,7 +90,7 @@
       display: inline-block;
       vertical-align: top;
       font-size: 12px;
-      margin: 5px;
+      margin: 5px 10px;
       padding: 5px;
       letter-spacing: normal;
       -webkit-transition: all .3s ease-in-out;
@@ -138,6 +139,17 @@
           }
         }
       }
+    }
+  }
+}
+
+@media (max-width: 544px) {
+  .g-list {
+    padding-top: 90px;
+  }
+  .g-mt-list {
+    .container{
+      margin: 0 -15px;
     }
   }
 }

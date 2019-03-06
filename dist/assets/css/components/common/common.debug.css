@@ -183,3 +183,16 @@ a:hover {
   text-decoration: none;
   cursor: pointer;
 }
+.container {
+  position: relative;
+  margin: 0 auto;
+  padding-right: 15px;
+  padding-left: 15px;
+  max-width: 80pc;
+  text-align: left;
+}
+.container:after {
+  display: block;
+  content: "";
+  clear: both;
+}

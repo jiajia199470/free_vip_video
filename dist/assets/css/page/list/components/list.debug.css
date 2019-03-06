@@ -1,5 +1,5 @@
 .g-list {
-  margin-top: 30px;
+  padding-top: 5pc;
 }
 .g-list .mod_title {
   padding: 5px 0;
@@ -53,8 +53,6 @@
 }
 .g-list .mod_bd .figures_list {
   position: relative;
-  white-space: nowrap;
-  overflow: hidden;
 }
 .g-list .mod_bd .figure {
   display: block;
@@ -89,7 +87,7 @@
   display: inline-block;
   vertical-align: top;
   font-size: 12px;
-  margin: 5px;
+  margin: 5px 10px;
   padding: 5px;
   letter-spacing: normal;
   transition: all 0.3s ease-in-out;
@@ -136,4 +134,12 @@
 .g-list .mod_bd .list_item .figure_title a:hover {
   text-decoration: none;
   opacity: 0.6;
+}
+@media (max-width: 544px) {
+  .g-list {
+    padding-top: 90px;
+  }
+  .g-mt-list .container {
+    margin: 0 -15px;
+  }
 }

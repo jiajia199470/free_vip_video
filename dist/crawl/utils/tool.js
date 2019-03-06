@@ -12,3 +12,14 @@ exports.sleep = function (numberMillis) {
     if (now.getTime() > exitTime) return;
   }
 };
+
+/**
+ * 算出一共有多少页数
+ * @param totalRecord
+ * @param pageSize 默认就是上面的数量
+ * @returns {number}
+ */
+
+exports.getTotalPageNum = function (totalRecord, pageSize) {
+  return (totalRecord + pageSize - 1) / pageSize;
+};

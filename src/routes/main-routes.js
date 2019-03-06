@@ -42,21 +42,37 @@ router
     var id = ctx.query.id;
     var tv = await controllers.tengxun.getTvDetail({id: id})
     ctx.render('page/play/tvPlay', {
-      title: '播放页',
       url: url,
-      title: title,
+      title: title?title:'播放页',
       tv: tv
     })
   })
+    .get('/movie/list', async (ctx, next) => {
+        let { list, pager } = await controllers.movie.getMovieList();
+        ctx.render('page/list/index', {
+            title: '电影列表',
+            type:1,
+            lists: list,
+            params: pager
+        });
+    })
+    .get('/tv/list', async (ctx, next) => {
+        let { list, pager } = await controllers.tengxun.getTvList();
+        ctx.render('page/list/index', {
+            title: '电视剧列表',
+            type:2,
+            lists: list,
+            params: pager
+        });
+    })
   .get('/page/list/:type', async (ctx, next) => {
     var type = ctx.query.type;
-    console.log(type)
     var page = ctx.query.page || 0;
     var pagesize = ctx.query.pagesize || 20;
     var lists = []
     var params = {page: page, pagesize: pagesize}
     if(type === 1) {
-      lists = await controllers.tengxun.getMovieList(params)
+      lists = await controllers.movie.getMovieList(params)
     } else {
       lists = await controllers.tengxun.getTvList(params)
     }
@@ -74,7 +90,7 @@ router
   .get('/api/tv/tvlist', controllers.tengxun.getTvList) // 获取电视剧列表
   .get('/api/tv/detail/:id', controllers.tengxun.getTvDetail) // 获取电视剧详情
   .get('/api/tv/detail/:id', controllers.tengxun.getTvDetail) // 获取电视剧详情
-  .get('/api/search', controllers.search.videoSearch)// 
+  .get('/api/search', controllers.search.videoSearch)//
 
 
 if(env === 'development') {

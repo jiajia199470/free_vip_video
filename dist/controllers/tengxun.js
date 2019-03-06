@@ -22,6 +22,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var TvList = require('../models').TvList;
 var Tv = require('../models').Tv;
 var Movie = require('../models').Movie;
+
+var _require = require('../crawl/utils/tool'),
+    getTotalPageNum = _require.getTotalPageNum;
+
 var getMovieList = exports.getMovieList = function () {
   var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(data) {
     var page, pagesize, MovieList;
@@ -128,9 +132,18 @@ var getTvList = exports.getTvList = function () {
             page = data && data.page || 0;
             page_size = data && +data.pagesize || 20;
             _context4.next = 4;
-            return TvList.findAll({
+            return TvList.findAndCountAll({
               offset: page * page_size,
               limit: page_size
+            }).then(function (res) {
+              var result = {};
+              var pager = {};
+              result.list = res.rows;
+              pager.pageCount = Math.floor(getTotalPageNum(res.count, page_size)); // 总页数
+              pager.countindex = page + 1; // 当前页
+              pager.pageSize = page_size; // 页数
+              result.pager = pager;
+              return result;
             });
 
           case 4:
