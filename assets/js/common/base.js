@@ -1,1 +1,1 @@
-require('../utils/lib-pagination/pagination.js'); 
+require('../utils/lib-pagination/pagination.js');
