@@ -396,6 +396,11 @@ a:hover {
   letter-spacing: normal;
   transition: all 0.3s ease-in-out;
 }
+@media (max-width: 544px) {
+  .g-list .mod_bd .list_item {
+    margin: 5px;
+  }
+}
 .g-list .mod_bd .list_item .figure_caption {
   width: 175px;
   position: absolute;
