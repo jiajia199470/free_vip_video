@@ -64,8 +64,7 @@
       font-weight: 500;
       z-index: 2;
       img {
-        width: 175px;
-        height: 245px;
+        width: 100%;
       }
     }
     .figure_info {
@@ -85,14 +84,13 @@
       }
     }
     .list_item{
-      width: 175px;
-      height: 272px;
       display: inline-block;
+      box-sizing: border-box;
+      width: 16.6%;
       vertical-align: top;
       font-size: 12px;
-      margin: 5px 10px;
       @media (max-width: 544px){
-        margin: 5px;
+        width: 33.33%;
       }
       padding: 5px;
       letter-spacing: normal;
@@ -100,7 +98,7 @@
       -moz-transition: all .3s ease-in-out;
       transition: all .3s ease-in-out;
       .figure_caption{
-        width: 175px;
+        width:100%;
         position: absolute;
         left: 0;
         right: 0;
