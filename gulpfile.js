@@ -7,6 +7,9 @@ var uglify = require('gulp-uglify')
 var minify = require('gulp-minify-css')
 var exec = require('child_process').exec
 const babel = require('gulp-babel')
+var webpack = require('webpack')
+var  named =require('vinyl-named');
+var gulpWebpack = require('webpack-stream')
 const gulp = require('gulp')
 const eslint = require('gulp-eslint')
 const nodemon = require('gulp-nodemon')
@@ -268,6 +271,19 @@ gulp.task('js', function() {
     // .pipe(eslint.format())
     // 使用browserify解析
     .pipe(getBrowserifyStream())
+      .pipe(named())
+    .pipe(gulpWebpack({
+        module:{
+            loaders:[{
+                test:/\.js$/,
+                loader:'babel'
+            }]
+        }
+    }),null,(err,stats)=>{
+        // log(`Finished '${colors.cyan('scripts')}'`,stats.toString({
+        //     chunks:false
+        // }))
+    })
     .pipe(babel({
       presets: ['es2015']
     }))
