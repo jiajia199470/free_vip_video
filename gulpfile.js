@@ -289,9 +289,9 @@ gulp.task('js', function() {
         //     chunks:false
         // }))
     })
-    .pipe(babel({
-      presets: ['es2015']
-    }))
+    // .pipe(babel({
+    //   presets: ['es2015']
+    // }))
     // 生成debug文件         
     .pipe(parseDebugPath('js'))
     .pipe(gulp.dest('./dist/assets/js/'))
