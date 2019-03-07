@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /******/(function (modules) {
 	// webpackBootstrap
@@ -49,62 +49,63 @@
 	/***/0:
 	/***/function _(module, exports, __webpack_require__) {
 
-		module.exports = __webpack_require__(106);
+		module.exports = __webpack_require__(103);
 
 		/***/
 	},
 
-	/***/106:
+	/***/100:
+	/***/function _(module, exports) {
+
+		"use strict";
+
+		(function (window, $) {
+			var pagination = {
+				init: function init() {
+					var self = this;
+					self.loadpage();
+				},
+				exeData: function exeData(num, type) {
+					pagination.loadData(num);
+					pagination.loadpage();
+				},
+				loadData: function loadData(num) {
+					$("#PageCount").val(num);
+				},
+				loadpage: function loadpage() {
+					var myPageCount = parseInt($("#PageCount").val());
+					var myPageSize = parseInt($("#PageSize").val());
+					var countindex = parseInt($('#countindex').val());
+					$('#pagination').jqPaginator({
+						totalPages: myPageCount,
+						visiblePages: parseInt($("#visiblePages").val()),
+						currentPage: countindex,
+						first: '<li class="first"><a href="javascript:;">首页</a></li>',
+						prev: '<li class="prev"><a href="javascript:;"><i class="arrow arrow2"></i>上一页</a></li>',
+						next: '<li class="next"><a href="javascript:;">下一页<i class="arrow arrow3"></i></a></li>',
+						last: '<li class="last"><a href="javascript:;">末页(总' + myPageCount + '页)</a></li>',
+						page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+						onPageChange: function onPageChange(num, type) {
+							// console.log(type + ':' + num)
+							if (type == "change") {
+								pagination.exeData(num, type);
+							}
+						}
+					});
+				}
+			};
+			pagination.init();
+		})(window, jQuery);
+
+		/***/
+	},
+
+	/***/103:
 	/***/function _(module, exports, __webpack_require__) {
 
 		'use strict';
 
-		__webpack_require__(107);
-
-		/***/
-	},
-
-	/***/107:
-	/***/function _(module, exports) {
-
-		'use strict';
-
-		(function (window, $) {
-			var baseUrl = 'https://www.myxin.top/jx/api/?url=';
-			var videoUrl = $('#vplay').attr('data-src');
-			var playUrl = '';
-			var $vplay = $('#vplay');
-			var Tv = {
-				init: function init() {
-					var self = this;
-					console.log($('.api:first'));
-					self.changePort();
-					self.videoPlay();
-				},
-				videoPlay: function videoPlay() {
-					$('.api:first').trigger('click');
-				},
-				changePort: function changePort() {
-					$(document).on('click', '.api', function () {
-						var me = $(this);
-						var uid = me.find('input').attr('id');
-						if (+uid === 1) {
-							baseUrl = 'https://www.myxin.top/jx/api/?url=';
-						} else if (+uid === 2) {
-							baseUrl = 'https://jx.wslmf.com/?url=';
-						} else if (+uid === 3) {
-							baseUrl = 'https://api.bbbbbb.me/jx/?url=';
-						}
-						$vplay.attr('src', baseUrl + videoUrl);
-						$('.api').each(function () {
-							$(this).removeClass('active');
-						});
-						me.addClass('active');
-					});
-				}
-			};
-			Tv.init();
-		})(window, jQuery);
+		__webpack_require__(100);
 
 		/***/
 	}

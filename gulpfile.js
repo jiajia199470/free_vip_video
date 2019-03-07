@@ -17,6 +17,8 @@ var util = require('gulp-util'); // 主要输出错误log   https://www.npmjs.co
 var through = require('through2'); // through2是对node.js原生stream.Transform进行的封装 http://www.zhihu.com/question/39391770
 require('shelljs/global'); // 支持rm删除文件
 
+var path  = require('path');
+
 const friendlyFormatter = require('eslint-friendly-formatter')
 // 流错误处理
 var errStream = function(stream, err) {
@@ -271,7 +273,10 @@ gulp.task('js', function() {
     // .pipe(eslint.format())
     // 使用browserify解析
     .pipe(getBrowserifyStream())
-      .pipe(named())
+     .pipe(named(function(file) {
+        // 解决在js下没有对应生成page、common、uitls等文件夹目录；目的：dist输出到js/*文件夹下，而不是直接输出到js/下；
+         return file.relative.slice(0, - path.extname(file.path).length)
+     })) //vinyl-named用来保持输入和输出的文件名相同, 否则会自动生成一个hash.
     .pipe(gulpWebpack({
         module:{
             loaders:[{

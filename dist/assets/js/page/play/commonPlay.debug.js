@@ -49,12 +49,22 @@
 	/***/0:
 	/***/function _(module, exports, __webpack_require__) {
 
-		module.exports = __webpack_require__(107);
+		module.exports = __webpack_require__(104);
 
 		/***/
 	},
 
-	/***/107:
+	/***/104:
+	/***/function _(module, exports, __webpack_require__) {
+
+		'use strict';
+
+		__webpack_require__(105);
+
+		/***/
+	},
+
+	/***/105:
 	/***/function _(module, exports) {
 
 		'use strict';
@@ -64,12 +74,16 @@
 			var videoUrl = $('#vplay').attr('data-src');
 			var playUrl = '';
 			var $vplay = $('#vplay');
-			var Tv = {
+			var piframe = {
 				init: function init() {
 					var self = this;
 					console.log($('.api:first'));
 					self.changePort();
 					self.videoPlay();
+
+					if ($(window).width() <= 544) {
+						$('#ckvip').css('height', '200px');
+					}
 				},
 				videoPlay: function videoPlay() {
 					$('.api:first').trigger('click');
@@ -93,7 +107,7 @@
 					});
 				}
 			};
-			Tv.init();
+			piframe.init();
 		})(window, jQuery);
 
 		/***/

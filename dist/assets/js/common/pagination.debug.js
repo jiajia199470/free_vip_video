@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /******/(function (modules) {
 	// webpackBootstrap
@@ -49,80 +49,12 @@
 	/***/0:
 	/***/function _(module, exports, __webpack_require__) {
 
-		__webpack_require__(102);
-		module.exports = __webpack_require__(104);
+		module.exports = __webpack_require__(100);
 
 		/***/
 	},
 
-	/***/102:
-	/***/function _(module, exports, __webpack_require__) {
-
-		'use strict';
-
-		__webpack_require__(103);
-
-		/***/
-	},
-
-	/***/103:
-	/***/function _(module, exports) {
-
-		'use strict';
-
-		(function ($, window) {
-			var movieList = [];
-			var tvList = [];
-			var isSearch = false;
-			var Search = {
-				init: function init() {
-					var self = this;
-					self.eventHandler();
-				},
-				eventHandler: function eventHandler() {
-					$(document).on('click', '#doplayers', function () {
-						var searchValue = $('#url').val();
-						if (searchValue.match('//')) {
-							window.location.href = '/page/play/index?url=' + searchValue;
-						} else {
-							$.ajax({
-								url: '/api/search?value=' + searchValue,
-								dataType: 'json',
-								beforeSend: function beforeSend() {
-									isSearch = true;
-									$('.fa-search').hide();
-									$('.fa-spinner').show();
-								},
-								success: function success(res) {
-									$('.fa-search').show();
-									$('.fa-spinner').hide();
-									isSearch = false;
-									movieList = res.data.movie ? res.data.movie : [];
-									tvList = res.data.tv ? res.data.tv : [];
-								}
-							});
-						}
-					});
-				}
-
-			};
-			Search.init();
-		})(jQuery, window);
-
-		/***/
-	},
-
-	/***/104:
-	/***/function _(module, exports, __webpack_require__) {
-
-		'use strict';
-
-		__webpack_require__(105);
-
-		/***/
-	},
-
-	/***/105:
+	/***/100:
 	/***/function _(module, exports) {
 
 		"use strict";

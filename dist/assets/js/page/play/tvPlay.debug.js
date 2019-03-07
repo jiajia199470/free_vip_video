@@ -49,54 +49,62 @@
 	/***/0:
 	/***/function _(module, exports, __webpack_require__) {
 
-		module.exports = __webpack_require__(103);
+		module.exports = __webpack_require__(107);
 
 		/***/
 	},
 
-	/***/103:
+	/***/106:
 	/***/function _(module, exports) {
 
 		'use strict';
 
-		(function ($, window) {
-			var movieList = [];
-			var tvList = [];
-			var isSearch = false;
-			var Search = {
+		(function (window, $) {
+			var baseUrl = 'https://www.myxin.top/jx/api/?url=';
+			var videoUrl = $('#vplay').attr('data-src');
+			var playUrl = '';
+			var $vplay = $('#vplay');
+			var Tv = {
 				init: function init() {
 					var self = this;
-					self.eventHandler();
+					console.log($('.api:first'));
+					self.changePort();
+					self.videoPlay();
 				},
-				eventHandler: function eventHandler() {
-					$(document).on('click', '#doplayers', function () {
-						var searchValue = $('#url').val();
-						if (searchValue.match('//')) {
-							window.location.href = '/page/play/index?url=' + searchValue;
-						} else {
-							$.ajax({
-								url: '/api/search?value=' + searchValue,
-								dataType: 'json',
-								beforeSend: function beforeSend() {
-									isSearch = true;
-									$('.fa-search').hide();
-									$('.fa-spinner').show();
-								},
-								success: function success(res) {
-									$('.fa-search').show();
-									$('.fa-spinner').hide();
-									isSearch = false;
-									movieList = res.data.movie ? res.data.movie : [];
-									tvList = res.data.tv ? res.data.tv : [];
-								}
-							});
+				videoPlay: function videoPlay() {
+					$('.api:first').trigger('click');
+				},
+				changePort: function changePort() {
+					$(document).on('click', '.api', function () {
+						var me = $(this);
+						var uid = me.find('input').attr('id');
+						if (+uid === 1) {
+							baseUrl = 'https://www.myxin.top/jx/api/?url=';
+						} else if (+uid === 2) {
+							baseUrl = 'https://jx.wslmf.com/?url=';
+						} else if (+uid === 3) {
+							baseUrl = 'https://api.bbbbbb.me/jx/?url=';
 						}
+						$vplay.attr('src', baseUrl + videoUrl);
+						$('.api').each(function () {
+							$(this).removeClass('active');
+						});
+						me.addClass('active');
 					});
 				}
-
 			};
-			Search.init();
-		})(jQuery, window);
+			Tv.init();
+		})(window, jQuery);
+
+		/***/
+	},
+
+	/***/107:
+	/***/function _(module, exports, __webpack_require__) {
+
+		'use strict';
+
+		__webpack_require__(106);
 
 		/***/
 	}
