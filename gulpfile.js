@@ -271,28 +271,28 @@ gulp.task('js', function() {
     // eslint 
     // .pipe(eslint())
     // .pipe(eslint.format())
-    // 使用browserify解析
+    //  .pipe(named(function(file) {
+    //     // 解决在js下没有对应生成page、common、uitls等文件夹目录；目的：dist输出到js/*文件夹下，而不是直接输出到js/下；
+    //      return file.relative.slice(0, - path.extname(file.path).length)
+    //  })) //vinyl-named用来保持输入和输出的文件名相同, 否则会自动生成一个hash.
+    // .pipe(gulpWebpack({
+    //     module:{
+    //         loaders:[{
+    //             test:/\.js$/,
+    //             loader:'babel'
+    //         }]
+    //     }
+    // }),null,(err,stats)=>{
+    //     // log(`Finished '${colors.cyan('scripts')}'`,stats.toString({
+    //     //     chunks:false
+    //     // }))
+    // })
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    // 使用browserify解析 require()
     .pipe(getBrowserifyStream())
-     .pipe(named(function(file) {
-        // 解决在js下没有对应生成page、common、uitls等文件夹目录；目的：dist输出到js/*文件夹下，而不是直接输出到js/下；
-         return file.relative.slice(0, - path.extname(file.path).length)
-     })) //vinyl-named用来保持输入和输出的文件名相同, 否则会自动生成一个hash.
-    .pipe(gulpWebpack({
-        module:{
-            loaders:[{
-                test:/\.js$/,
-                loader:'babel'
-            }]
-        }
-    }),null,(err,stats)=>{
-        // log(`Finished '${colors.cyan('scripts')}'`,stats.toString({
-        //     chunks:false
-        // }))
-    })
-    // .pipe(babel({
-    //   presets: ['es2015']
-    // }))
-    // 生成debug文件         
+      // 生成debug文件
     .pipe(parseDebugPath('js'))
     .pipe(gulp.dest('./dist/assets/js/'))
     // 压缩文件 
