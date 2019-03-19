@@ -2,19 +2,22 @@
 <header class="topbar" id="top">
     <div class="container">
         <div class="navbar-header">
-            <a href="/page/home/index" class="navbar-brand brand-upyun" target="_blank">&nbsp;vip电影网</a>
+            <a href="/page/home/index" class="navbar-brand brand-upyun" target="_blank">&nbsp;vip视频网</a>
         </div>
 
         <nav class="home-nav">
-             <a class="nav-item" href="/">首页</a>
-            <a class="nav-item" href="/movie/list">电影</a>
-            <a class="nav-item" href="/tv/list">电视剧</a>
+             <a class="nav-item {{if title=='首页'}}active{{/if}}" href="/">首页</a>
+            <!--<a class="nav-item" href="/movie/list">电影</a>-->
+            <!--<a class="nav-item" href="/tv/list">电视剧</a>-->
+            <a class="nav-item {{if type==1}}active{{/if}}" href="/page/list/1?page=1">电影</a>
+            <a class="nav-item {{if type==2}}active{{/if}}" href="/page/list/2?page=1">电视剧</a>
+            <a class="nav-item {{if type==4}}active{{/if}}" href="/page/play/index">vip视频解析</a>
             <!--<a class="nav-item" href="/zy/list">综艺</a>-->
         </nav>
 
         <div class="search-wraper" role="search">
             <div class="form-group">
-                <input class="form-control search clearable" placeholder="输入电影名或视频地址" autocomplete="off" autofocus="" tabindex="0" autocorrect="off" autocapitalize="off" spellcheck="false" id="url"><i class="fa fa-search" id="doplayers"></i>
+                <input class="form-control search clearable" placeholder="输入电影、电视剧、视频名" autocomplete="off" autofocus="" tabindex="0" autocorrect="off" autocapitalize="off" spellcheck="false" id="url"><i class="fa fa-search" id="doplayers"></i>
                 <i class="fa fa-spinner fa-spin"></i>
             </div>
         </div>

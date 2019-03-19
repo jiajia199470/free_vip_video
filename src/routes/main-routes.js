@@ -31,9 +31,9 @@ router
     var title = ctx.query.title;
 
     ctx.render('page/play/commonPlay', {
-      title: '播放页',
+      title: '播放页' || title,
       url: url,
-      title: title
+      type:4,
     })
   })
   .get('/page/play/tv', async (ctx, next) => {
@@ -47,6 +47,15 @@ router
       tv: tv
     })
   })
+    .get('/page/list/search', async (ctx, next)=>{
+        var  title ='search';
+        var lists = await controllers.search.getVideo(ctx);
+        ctx.render('page/list/searchResult', {
+            title: title,
+            lists:lists,
+            key:ctx.query.value
+        })
+    })
     .get('/movie/list', async (ctx, next) => {
         let { list, pager } = await controllers.movie.getMovieList();
         ctx.render('page/list/index', {
@@ -66,26 +75,25 @@ router
         });
     })
   .get('/page/list/:type', async (ctx, next) => {
-    var type = ctx.query.type;
+    var type = ctx.query.type || ctx.params.type;
     var page = ctx.query.page || 0;
     var pagesize = ctx.query.pagesize || 20;
-    var lists = []
+    var lists = [];
+    var title = '列表页';
     var params = {page: page, pagesize: pagesize}
-    if(type === 1) {
+    if(type == 1) { // 电影
+        title = '电影'+title;
       lists = await controllers.movie.getMovieList(params)
-    } else {
+    } else if(type == 2){ // 电视剧
+        title = '电视剧'+title;
       lists = await controllers.tengxun.getTvList(params)
     }
-    ctx.render('page/list/index', {
-      title: '列表页',
-      type: type,
-      list: lists,
-      params: {
-        pageCount: '',
-        pageSize: '',
-        countindex: ''
-      }
-    })
+      ctx.render('page/list/index', {
+          title: title,
+          type: type,
+          lists: lists.list,
+          params: lists.pager
+      })
   })
   .get('/api/tv/tvlist', controllers.tengxun.getTvList) // 获取电视剧列表
   .get('/api/tv/detail/:id', controllers.tengxun.getTvDetail) // 获取电视剧详情

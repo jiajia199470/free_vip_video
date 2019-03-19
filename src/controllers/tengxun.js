@@ -37,8 +37,9 @@ export let createTv = async function (data) {
   return true; // 返回数据
 };
 export let getTvList = async function(data) {
-  const page = data && data.page || 0;
+  const page = data && Number(data.page-1) || 0;
   const page_size =  data && +data.pagesize || 20;
+  console.log(page_size);
   var tvLists = await TvList.findAndCountAll({
     offset: page * page_size,
     limit: page_size
@@ -47,13 +48,14 @@ export let getTvList = async function(data) {
       var pager = {};
       result.list = res.rows;
       pager.pageCount = Math.floor(getTotalPageNum(res.count,page_size));// 总页数
-      pager.countindex = page+1;// 当前页
+      pager.countindex = Number(page)+1;// 当前页
       pager.pageSize = page_size;// 页数
       result.pager = pager;
       return result;
   });
   return JSON.parse(JSON.stringify(tvLists))
-}
+};
+
 export let getTvDetail = async function(data) {
   const tvId = parseInt(data.id) || 1;
   var tvDetail = await Tv.findAll({

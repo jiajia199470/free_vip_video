@@ -3,6 +3,7 @@ import {sleep} from '../utils/tool.js'
 import Tvlist from '../../services/tengxun/tvlist'
 import controllers from '../../controllers/index.js'
 const models = require('../../models')
+const Tv = require('../../models').Tv
 const async = require('async')
 var cheerio = require('cheerio')
 var rp = require('request-promise')
@@ -69,12 +70,30 @@ const getTvDetail = function (item, callback) {
         list.each(function() {
             let $item = $(this)
             var roles = []
-            Tvlist.createTvDetail({
-                tvListId: +item.id,
-                title: title,
-                url: $item.find('a').attr('href'),
-                content: $item.find('a span').text().trim(),
-            }).catch(() => { })
+
+           Tv.findOne({//还有find、findAll等方法
+                    where: {
+                        tvListId: item.id,//查询条件
+                        content: $item.find('a span').text().trim(),
+                    }
+                }).then(result=>{
+                console.log(result)//空时为null
+
+               let data = {
+                   tvListId: +item.id,
+                   title: title,
+                   url: $item.find('a').attr('href'),
+                   content: $item.find('a span').text().trim(),
+               };
+
+               if(result){
+                  // 更新数据
+                   console.log('更新数据更新数据更新数据更新数据更新数据更新数据更新数据更新数据');
+                   Tvlist.updateTvDetail(data)
+               }else {
+                   Tvlist.createTvDetail(data).catch(() => { })
+               }
+            })
         })
         callback(null, 'successful')
         return null;
@@ -83,15 +102,14 @@ const getTvDetail = function (item, callback) {
     })
 }
 const getTV = async function(data) {
-  var page = data && data.page || 0;
-  var pagesize = data && data.pagesize || 20;
-  var tvLists = await models.TvList.findAll({
-    offset: page*pagesize,
-    limit: pagesize
-  })
-  var searchResult = JSON.parse(JSON.stringify(tvLists))
+  // var page = data && data.page || 0;
+  // var pagesize = data && data.pagesize || 20;
+  // var tvLists = await models.TvList.findAll({
+  //   offset: page*pagesize,
+  //   limit: pagesize
+  // })
+  // var searchResult = JSON.parse(JSON.stringify(tvLists))
 
-   /*
    //更新特定一部电视剧的全集
    var tvLists = await  models.TvList.findOne({
         where: {
@@ -99,7 +117,7 @@ const getTV = async function(data) {
         }
     });
     var searchResult =[];
-    searchResult.push(tvLists.dataValues);*/
+    searchResult.push(tvLists.dataValues);
 
   if(searchResult.length) {
     // 使用async控制异步抓取   

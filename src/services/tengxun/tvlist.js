@@ -31,8 +31,21 @@ const createTvDetail = async function(data) {
   });
   return true; // 返回数据
 }
+
+const updateTvDetail = async function(data){
+  await Tv.update({
+      url:data.url
+  },{
+      'where':{
+        'tvListId':{eq:data.tvListId},
+        'content':{eq:data.content}
+      }
+  });
+    return true; // 返回数据
+}
 module.exports = {
   createTv,
   getTvUrl,
-  createTvDetail
+  createTvDetail,
+  updateTvDetail
 }

@@ -11,6 +11,7 @@
     },
     loadData: function(num) {
       $("#PageCount").val(num);
+      location.href = location.href.replace(/(\?page=)\d+/,'$1'+num);
     },
     loadpage: function() {
       var myPageCount = parseInt($("#PageCount").val());
@@ -26,7 +27,6 @@
         last: '<li class="last"><a href="javascript:;">末页(总'+myPageCount+'页)</a></li>',
         page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
         onPageChange: function (num, type) {
-          // console.log(type + ':' + num)
             if (type == "change") {
               pagination.exeData(num, type);
             }

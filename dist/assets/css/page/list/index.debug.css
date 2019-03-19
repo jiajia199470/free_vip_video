@@ -228,10 +228,14 @@ a:hover {
   line-height: 40px;
 }
 .topbar .home-nav .nav-item {
-  float: left;
+  display: inline-block;
   margin: 0 40px;
   padding: 20px 0 18px;
   transition: .3s 0s all linear;
+}
+.topbar .home-nav .nav-item.active {
+  font-weight: bold;
+  font-size: 24px;
 }
 .topbar .search-wraper {
   float: right;
@@ -306,7 +310,7 @@ a:hover {
   padding-top: 5pc;
 }
 .g-list .mod_title {
-  padding: 5px 0;
+  padding: 20px 0;
 }
 .g-list .mod_title .title {
   font-size: 28px;

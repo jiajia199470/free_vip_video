@@ -10,8 +10,9 @@
 
 <body>
 <%- include('../../components/layout/nav.html') %>
-  <section class="g-play ">
+  <section class="g-play">
     <section class="container">
+      <div class="g-play-address"><input type="text" id="playAddress" placeholder="输入或粘贴播放地址"><span id="playAddressBtn">立即播放</span></div>
       <%- include('./components/playIframe.html') %>
       <%- include('./components/portSelect.html') %>
     </section>

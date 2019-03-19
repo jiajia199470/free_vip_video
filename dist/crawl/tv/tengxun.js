@@ -4,10 +4,6 @@ var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _stringify = require('babel-runtime/core-js/json/stringify');
-
-var _stringify2 = _interopRequireDefault(_stringify);
-
 var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
@@ -29,6 +25,7 @@ var _index2 = _interopRequireDefault(_index);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var models = require('../../models');
+var Tv = require('../../models').Tv;
 var async = require('async');
 var cheerio = require('cheerio');
 var rp = require('request-promise');
@@ -95,12 +92,30 @@ var getTvDetail = function getTvDetail(item, callback) {
     list.each(function () {
       var $item = $(this);
       var roles = [];
-      _tvlist2.default.createTvDetail({
-        tvListId: +item.id,
-        title: title,
-        url: $item.find('a').attr('href'),
-        content: $item.find('a span').text().trim()
-      }).catch(function () {});
+
+      Tv.findOne({ //还有find、findAll等方法
+        where: {
+          tvListId: item.id, //查询条件
+          content: $item.find('a span').text().trim()
+        }
+      }).then(function (result) {
+        console.log(result); //空时为null
+
+        var data = {
+          tvListId: +item.id,
+          title: title,
+          url: $item.find('a').attr('href'),
+          content: $item.find('a span').text().trim()
+        };
+
+        if (result) {
+          // 更新数据
+          console.log('更新数据更新数据更新数据更新数据更新数据更新数据更新数据更新数据');
+          _tvlist2.default.updateTvDetail(data);
+        } else {
+          _tvlist2.default.createTvDetail(data).catch(function () {});
+        }
+      });
     });
     callback(null, 'successful');
     return null;
@@ -110,35 +125,26 @@ var getTvDetail = function getTvDetail(item, callback) {
 };
 var getTV = function () {
   var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(data) {
-    var page, pagesize, tvLists, searchResult;
+    var tvLists, searchResult;
     return _regenerator2.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            page = data && data.page || 0;
-            pagesize = data && data.pagesize || 20;
-            _context.next = 4;
-            return models.TvList.findAll({
-              offset: page * pagesize,
-              limit: pagesize
+            _context.next = 2;
+            return models.TvList.findOne({
+              where: {
+                id: 4
+              }
             });
 
-          case 4:
+          case 2:
             tvLists = _context.sent;
-            searchResult = JSON.parse((0, _stringify2.default)(tvLists));
+            searchResult = [];
 
-            /*
-            //更新特定一部电视剧的全集
-            var tvLists = await  models.TvList.findOne({
-                 where: {
-                     id: 4
-                 }
-             });
-             var searchResult =[];
-             searchResult.push(tvLists.dataValues);*/
+            searchResult.push(tvLists.dataValues);
 
             if (!searchResult.length) {
-              _context.next = 11;
+              _context.next = 10;
               break;
             }
 
@@ -158,13 +164,13 @@ var getTV = function () {
               page: page += 1,
               pagesize: 20
             });
-            _context.next = 12;
+            _context.next = 11;
             break;
 
-          case 11:
+          case 10:
             return _context.abrupt('return', false);
 
-          case 12:
+          case 11:
           case 'end':
             return _context.stop();
         }

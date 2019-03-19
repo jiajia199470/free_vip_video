@@ -129,9 +129,11 @@ var getTvList = exports.getTvList = function () {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            page = data && data.page || 0;
+            page = data && Number(data.page - 1) || 0;
             page_size = data && +data.pagesize || 20;
-            _context4.next = 4;
+
+            console.log(page_size);
+            _context4.next = 5;
             return TvList.findAndCountAll({
               offset: page * page_size,
               limit: page_size
@@ -140,17 +142,17 @@ var getTvList = exports.getTvList = function () {
               var pager = {};
               result.list = res.rows;
               pager.pageCount = Math.floor(getTotalPageNum(res.count, page_size)); // 总页数
-              pager.countindex = page + 1; // 当前页
+              pager.countindex = Number(page) + 1; // 当前页
               pager.pageSize = page_size; // 页数
               result.pager = pager;
               return result;
             });
 
-          case 4:
+          case 5:
             tvLists = _context4.sent;
             return _context4.abrupt('return', JSON.parse((0, _stringify2.default)(tvLists)));
 
-          case 6:
+          case 7:
           case 'end':
             return _context4.stop();
         }
@@ -162,6 +164,7 @@ var getTvList = exports.getTvList = function () {
     return _ref4.apply(this, arguments);
   };
 }();
+
 var getTvDetail = exports.getTvDetail = function () {
   var _ref5 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5(data) {
     var tvId, tvDetail;

@@ -5,17 +5,18 @@
   <%- include('../../components/layout/header.html') %>
   <title>{{title}}</title>
   <link rel="dns-prefetch" href="//yun.duiba.com.cn">
-  <link rel="stylesheet" href="/assets/css/page/play/commonPlay_201903071831.css" media="all" />
+  <link rel="stylesheet" href="/assets/css/page/play/commonPlay_201903192133.css" media="all" />
 </head>
 
 <body>
 <%- include('../../components/layout/nav.html') %>
-  <section class="g-play ">
+  <section class="g-play">
     <section class="container">
+      <div class="g-play-address"><input type="text" id="playAddress" placeholder="输入或粘贴播放地址"><span id="playAddressBtn">立即播放</span></div>
       <%- include('./components/playIframe.html') %>
       <%- include('./components/portSelect.html') %>
     </section>
   </section>
-  <script type="text/javascript" src="/assets/js/page/play/commonPlay_201903071831.js"></script>
+  <script type="text/javascript" src="/assets/js/page/play/commonPlay_201903192133.js"></script>
 </body>
 </html>

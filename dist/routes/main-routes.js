@@ -1,9 +1,5 @@
 'use strict';
 
-var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
-
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
-
 var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
@@ -76,10 +72,11 @@ router.get('/', function (ctx, next) {
             title = ctx.query.title;
 
 
-            ctx.render('page/play/commonPlay', (0, _defineProperty3.default)({
-              title: '播放页',
-              url: url
-            }, 'title', title));
+            ctx.render('page/play/commonPlay', {
+              title: '播放页' || title,
+              url: url,
+              type: 4
+            });
 
           case 3:
           case 'end':
@@ -125,30 +122,27 @@ router.get('/', function (ctx, next) {
   return function (_x5, _x6) {
     return _ref3.apply(this, arguments);
   };
-}()).get('/movie/list', function () {
+}()).get('/page/list/search', function () {
   var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(ctx, next) {
-    var _ref5, list, pager;
-
+    var title, lists;
     return _regenerator2.default.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            _context4.next = 2;
-            return _index2.default.movie.getMovieList();
+            title = 'search';
+            _context4.next = 3;
+            return _index2.default.search.getVideo(ctx);
 
-          case 2:
-            _ref5 = _context4.sent;
-            list = _ref5.list;
-            pager = _ref5.pager;
+          case 3:
+            lists = _context4.sent;
 
-            ctx.render('page/list/index', {
-              title: '电影列表',
-              type: 1,
-              lists: list,
-              params: pager
+            ctx.render('page/list/searchResult', {
+              title: title,
+              lists: lists,
+              key: ctx.query.value
             });
 
-          case 6:
+          case 5:
           case 'end':
             return _context4.stop();
         }
@@ -159,25 +153,25 @@ router.get('/', function (ctx, next) {
   return function (_x7, _x8) {
     return _ref4.apply(this, arguments);
   };
-}()).get('/tv/list', function () {
-  var _ref6 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5(ctx, next) {
-    var _ref7, list, pager;
+}()).get('/movie/list', function () {
+  var _ref5 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5(ctx, next) {
+    var _ref6, list, pager;
 
     return _regenerator2.default.wrap(function _callee5$(_context5) {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:
             _context5.next = 2;
-            return _index2.default.tengxun.getTvList();
+            return _index2.default.movie.getMovieList();
 
           case 2:
-            _ref7 = _context5.sent;
-            list = _ref7.list;
-            pager = _ref7.pager;
+            _ref6 = _context5.sent;
+            list = _ref6.list;
+            pager = _ref6.pager;
 
             ctx.render('page/list/index', {
-              title: '电视剧列表',
-              type: 2,
+              title: '电影列表',
+              type: 1,
               lists: list,
               params: pager
             });
@@ -191,54 +185,32 @@ router.get('/', function (ctx, next) {
   }));
 
   return function (_x9, _x10) {
-    return _ref6.apply(this, arguments);
+    return _ref5.apply(this, arguments);
   };
-}()).get('/page/list/:type', function () {
-  var _ref8 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee6(ctx, next) {
-    var type, page, pagesize, lists, params;
+}()).get('/tv/list', function () {
+  var _ref7 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee6(ctx, next) {
+    var _ref8, list, pager;
+
     return _regenerator2.default.wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
-            type = ctx.query.type;
-            page = ctx.query.page || 0;
-            pagesize = ctx.query.pagesize || 20;
-            lists = [];
-            params = { page: page, pagesize: pagesize };
+            _context6.next = 2;
+            return _index2.default.tengxun.getTvList();
 
-            if (!(type === 1)) {
-              _context6.next = 11;
-              break;
-            }
+          case 2:
+            _ref8 = _context6.sent;
+            list = _ref8.list;
+            pager = _ref8.pager;
 
-            _context6.next = 8;
-            return _index2.default.movie.getMovieList(params);
-
-          case 8:
-            lists = _context6.sent;
-            _context6.next = 14;
-            break;
-
-          case 11:
-            _context6.next = 13;
-            return _index2.default.tengxun.getTvList(params);
-
-          case 13:
-            lists = _context6.sent;
-
-          case 14:
             ctx.render('page/list/index', {
-              title: '列表页',
-              type: type,
-              list: lists,
-              params: {
-                pageCount: '',
-                pageSize: '',
-                countindex: ''
-              }
+              title: '电视剧列表',
+              type: 2,
+              lists: list,
+              params: pager
             });
 
-          case 15:
+          case 6:
           case 'end':
             return _context6.stop();
         }
@@ -247,7 +219,69 @@ router.get('/', function (ctx, next) {
   }));
 
   return function (_x11, _x12) {
-    return _ref8.apply(this, arguments);
+    return _ref7.apply(this, arguments);
+  };
+}()).get('/page/list/:type', function () {
+  var _ref9 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee7(ctx, next) {
+    var type, page, pagesize, lists, title, params;
+    return _regenerator2.default.wrap(function _callee7$(_context7) {
+      while (1) {
+        switch (_context7.prev = _context7.next) {
+          case 0:
+            type = ctx.query.type || ctx.params.type;
+            page = ctx.query.page || 0;
+            pagesize = ctx.query.pagesize || 20;
+            lists = [];
+            title = '列表页';
+            params = { page: page, pagesize: pagesize };
+
+            if (!(type == 1)) {
+              _context7.next = 13;
+              break;
+            }
+
+            // 电影
+            title = '电影' + title;
+            _context7.next = 10;
+            return _index2.default.movie.getMovieList(params);
+
+          case 10:
+            lists = _context7.sent;
+            _context7.next = 18;
+            break;
+
+          case 13:
+            if (!(type == 2)) {
+              _context7.next = 18;
+              break;
+            }
+
+            // 电视剧
+            title = '电视剧' + title;
+            _context7.next = 17;
+            return _index2.default.tengxun.getTvList(params);
+
+          case 17:
+            lists = _context7.sent;
+
+          case 18:
+            ctx.render('page/list/index', {
+              title: title,
+              type: type,
+              lists: lists.list,
+              params: lists.pager
+            });
+
+          case 19:
+          case 'end':
+            return _context7.stop();
+        }
+      }
+    }, _callee7, undefined);
+  }));
+
+  return function (_x13, _x14) {
+    return _ref9.apply(this, arguments);
   };
 }()).get('/api/tv/tvlist', _index2.default.tengxun.getTvList) // 获取电视剧列表
 .get('/api/tv/detail/:id', _index2.default.tengxun.getTvDetail) // 获取电视剧详情

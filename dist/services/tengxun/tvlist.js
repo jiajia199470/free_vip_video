@@ -109,8 +109,41 @@ var createTvDetail = function () {
     return _ref3.apply(this, arguments);
   };
 }();
+
+var updateTvDetail = function () {
+  var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(data) {
+    return _regenerator2.default.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.next = 2;
+            return Tv.update({
+              url: data.url
+            }, {
+              'where': {
+                'tvListId': { eq: data.tvListId },
+                'content': { eq: data.content }
+              }
+            });
+
+          case 2:
+            return _context4.abrupt('return', true);
+
+          case 3:
+          case 'end':
+            return _context4.stop();
+        }
+      }
+    }, _callee4, this);
+  }));
+
+  return function updateTvDetail(_x4) {
+    return _ref4.apply(this, arguments);
+  };
+}();
 module.exports = {
   createTv: createTv,
   getTvUrl: getTvUrl,
-  createTvDetail: createTvDetail
+  createTvDetail: createTvDetail,
+  updateTvDetail: updateTvDetail
 };
