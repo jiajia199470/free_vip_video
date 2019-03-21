@@ -7,7 +7,7 @@
       <ul class="figures_list">
         {{each lists item i}}
         <li class="list_item">
-         {{if type === 1}}
+         {{if type == 1}}
           <a href="/page/play/index?url={{item.url}}&title={{item.name}}" target="_blank" class="figure"  title="{{item.name}}" >
             <img alt="{{item.name}}" src="{{item.imgUrl}}">
             <div class="figure_caption figure_caption_info">
